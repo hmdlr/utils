@@ -17,16 +17,16 @@ if (process.env.NODE_ENV !== 'development') {
   );
 }
 
-const LoggerInstance = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
+export const LoggerInstance = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'silly',
   levels: winston.config.npm.levels,
   format: winston.format.combine(
     winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     winston.format.errors({ stack: true }),
     winston.format.splat(),
-    winston.format.prettyPrint({ colorize: true })
+    winston.format.json()
   ),
   transports,
 });
 
-export default LoggerInstance;
+export const getLogger = (namespace: string): winston.Logger => LoggerInstance.child({ namespace });
