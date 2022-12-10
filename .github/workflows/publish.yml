@@ -26,7 +26,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ☣New *utils* artifact published☣
+            😼New utils artifact published😼
             Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
             Changelog:
             ${{ env.CHANGELOG }}
