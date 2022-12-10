@@ -1,0 +1,32 @@
+name: Release Announcement
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release-announcement:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: get-package-version
+        run: |
+          echo "PACKAGE_VERSION=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .version)" >> $GITHUB_ENV ;
+          echo "PACKAGE_NAME=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .name)" >> $GITHUB_ENV ;
+
+      - name: get-changelog
+        run: |
+          echo "CHANGELOG=$(cat ${GITHUB_WORKSPACE}/CHANGELOG.md | grep -A 1 $PACKAGE_VERSION)" >> $GITHUB_ENV
+
+      - name: Release Announcement
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ☣New *utils* artifact published☣
+            Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
+            Changelog:
+            ${{ env.CHANGELOG }}

@@ -1,0 +1,71 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src"]
+      }
+    }
+  },
+  "rules": {
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "max-len": [
+      "error", {
+        "ignoreComments": true,
+        "code": 100,
+        "tabWidth": 2
+      }],
+    "no-plusplus": [
+      "error", {
+        "allowForLoopAfterthoughts": true
+      }],
+    "no-underscore-dangle": [
+      "error", {
+        "allowAfterThis": true
+      }],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+    }],
+    "@typescript-eslint/comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+    }],
+    "object-curly-newline": ["error", {
+      "ObjectExpression": {
+        "multiline": true
+      },
+      "ObjectPattern": {
+        "multiline": true
+      },
+      "ImportDeclaration": {
+        "multiline": true
+      },
+      "ExportDeclaration": {
+        "multiline": true
+      }
+    }],
+    "no-param-reassign": 0
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ]
+}
