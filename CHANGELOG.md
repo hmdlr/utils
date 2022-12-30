@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://me.github.com/hmdlr/utils/compare/v0.0.6...v0.0.7) (2022-12-30)
+
+
+### Features
+
+* add `isAuth` middleware and `UnauthorizedError` to utils ([1546467](https://me.github.com/hmdlr/utils/commit/154646742139bb74621557df6cdea6bce7dd3201))
+
 ### [0.0.6](https://me.github.com/hmdlr/utils/compare/v0.0.5...v0.0.6) (2022-12-10)
 
 
