@@ -36,6 +36,8 @@ export const isAuth = (jwtSecret: string) => (/* every microservice will pass th
   }
   try {
     // eslint-disable-next-line @typescript-eslint/dot-notation
+	req['user'] = {};
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
     // eslint-disable-next-line @typescript-eslint/dot-notation
     req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
