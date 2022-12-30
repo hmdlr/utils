@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://me.github.com/hmdlr/utils/compare/v0.0.7...v0.0.8) (2022-12-30)
+
+
+### Features
+
+* isAuth now accepts the jwt params as double arrow function ([7233082](https://me.github.com/hmdlr/utils/commit/7233082818ff1328a2e0ea4e3e60b31ad37b5150))
+
 ### [0.0.7](https://me.github.com/hmdlr/utils/compare/v0.0.6...v0.0.7) (2022-12-30)
 
 
