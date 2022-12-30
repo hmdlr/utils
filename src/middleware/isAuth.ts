@@ -2,9 +2,14 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
 
+/* eslint-disable @typescript-eslint/dot-notation */
 function getTokenFromRequest(req: Request): string | undefined {
-  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    return req.headers.authorization.split(' ')[1];
+  let authHeader: string | string[] = req.headers['Authorization'] || req.headers['authorization'];
+  if (Array.isArray(authHeader)) {
+    [authHeader] = authHeader;
+  }
+  if (authHeader && authHeader.split(' ')[0] === 'Bearer') {
+    return authHeader.split(' ')[1];
   }
   return undefined;
 }
@@ -35,11 +40,8 @@ export const isAuth = (jwtSecret: string) => (/* every microservice will pass th
     throw new UnauthorizedError('Unauthorized');
   }
   try {
-    // eslint-disable-next-line @typescript-eslint/dot-notation
-	req['user'] = {};
-    // eslint-disable-next-line @typescript-eslint/dot-notation
+    req['user'] = {};
     req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
-    // eslint-disable-next-line @typescript-eslint/dot-notation
     req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
     next();
   } catch (e) {
