@@ -10,10 +10,10 @@ function getTokenFromRequest(req: Request): string | undefined {
 }
 
 /**
- * Middleware to check if the user is authenticated
- * Sets the user in the request object as req['user']
+ * Middleware to check if the user is authenticated <br>
+ * Sets the user in the request object as req['user'] <br>
  * The user object contains the user id and the username <br>
- * ### Returned object format: ### <br>
+ * ### Returned object format: ###
  * <pre>
  * {
  *   id: string,
@@ -25,8 +25,7 @@ function getTokenFromRequest(req: Request): string | undefined {
  * @param res
  * @param next
  */
-export const isAuth = (
-  jwtSecret: string, /* every microservice will pass the secret as we don't access the env here */
+export const isAuth = (jwtSecret: string) => (/* every microservice will pass the secret as we don't access the env here */
   req: Request,
   res: Response,
   next: NextFunction
