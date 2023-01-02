@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://me.github.com/hmdlr/utils/compare/v0.0.10...v0.1.0) (2023-01-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* add client for microservices
+
+### Features
+
+* add client for microservices ([77f854a](https://me.github.com/hmdlr/utils/commit/77f854a86b8181ff2ce356cc3e4014b393227c62))
+
 ### [0.0.10](https://me.github.com/hmdlr/utils/compare/v0.0.9...v0.0.10) (2022-12-30)
 
 ### [0.0.9](https://me.github.com/hmdlr/utils/compare/v0.0.8...v0.0.9) (2022-12-30)
