@@ -1,16 +1,13 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getLogger } from '../Logger';
 import { Microservice } from '../Microservice';
 
-export class Client {
-  private readonly logger = getLogger();
+const defaultOptions: AxiosRequestConfig = {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' },
+};
 
-  private readonly defaultOptions: AxiosRequestConfig = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-
-  public async get(
+export const getClient = () => ({
+  async get(
     microservice: keyof typeof Microservice,
     uri: string,
     options?: AxiosRequestConfig
@@ -23,9 +20,9 @@ export class Client {
       }
     );
     return response.data;
-  }
+  },
 
-  public async post(
+  async post(
     microservice: keyof typeof Microservice,
     uri: string,
     options?: AxiosRequestConfig
@@ -38,9 +35,9 @@ export class Client {
       }
     );
     return response.data;
-  }
+  },
 
-  public async put(
+  async put(
     microservice: keyof typeof Microservice,
     uri: string,
     options?: AxiosRequestConfig
@@ -53,9 +50,9 @@ export class Client {
       }
     );
     return response.data;
-  }
+  },
 
-  public async delete(
+  async delete(
     microservice: keyof typeof Microservice,
     uri: string,
     options?: AxiosRequestConfig
@@ -68,5 +65,5 @@ export class Client {
       }
     );
     return response.data;
-  }
-}
+  },
+});
