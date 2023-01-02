@@ -1,12 +1,12 @@
 {
   "name": "@hmdlr/utils",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Utils for StarPhish services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "release": "standard-version && git push --follow-tags && npm publish",
+    "release": "npm run build && standard-version && git push --follow-tags && npm publish",
     "clean": "rm -rf dist"
   },
   "keywords": [],
