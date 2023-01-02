@@ -60,6 +60,7 @@ export const getAuthIfPresent = (jwtSecret: string) => (
       req['user'] = {};
       req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
       req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
+      req['user'].bearer = bearer;
     } catch (e) {
       // do nothing
     }

@@ -6,6 +6,9 @@ const defaultOptions: AxiosRequestConfig = {
   headers: { 'Content-Type': 'application/json' },
 };
 
+/**
+ * Assumes your environment variables are set up correctly
+ */
 export const getClient = () => ({
   async get(
     microservice: keyof typeof Microservice,
