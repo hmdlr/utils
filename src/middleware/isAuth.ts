@@ -48,3 +48,21 @@ export const isAuth = (jwtSecret: string) => (/* every microservice will pass th
     throw new UnauthorizedError('Unauthorized');
   }
 };
+
+export const getAuthIfPresent = (jwtSecret: string) => (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const bearer = getTokenFromRequest(req);
+  if (bearer) {
+    try {
+      req['user'] = {};
+      req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
+      req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
+    } catch (e) {
+      // do nothing
+    }
+  }
+  next();
+};
