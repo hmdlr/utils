@@ -15,7 +15,7 @@ export const getClient = () => ({
     const response = await axios.get(
       `${Microservice[microservice]}/${uri}`,
       {
-        ...this.defaultOptions,
+        ...defaultOptions,
         ...options,
       }
     );
@@ -30,7 +30,7 @@ export const getClient = () => ({
     const response = await axios.post(
       `${Microservice[microservice]}/${uri}`,
       {
-        ...this.defaultOptions,
+        ...defaultOptions,
         ...options,
       }
     );
@@ -45,7 +45,7 @@ export const getClient = () => ({
     const response = await axios.put(
       `${Microservice[microservice]}/${uri}`,
       {
-        ...this.defaultOptions,
+        ...defaultOptions,
         ...options,
       }
     );
@@ -60,7 +60,7 @@ export const getClient = () => ({
     const response = await axios.delete(
       `${Microservice[microservice]}/${uri}`,
       {
-        ...this.defaultOptions,
+        ...defaultOptions,
         ...options,
       }
     );
