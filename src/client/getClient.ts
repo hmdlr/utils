@@ -13,7 +13,7 @@ export const getClient = () => ({
     options?: AxiosRequestConfig
   ): Promise<AxiosResponse> {
     const response = await axios.get(
-      `${Microservice[microservice]}/${uri}`,
+      `${Microservice[microservice]}${uri}`,
       {
         ...defaultOptions,
         ...options,
