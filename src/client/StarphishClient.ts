@@ -30,7 +30,7 @@ export interface StarphishClient {
     options?: AxiosRequestConfig
   ): Promise<AxiosResponse>;
   authenticate(
-    bearerToken: string
+    bearerToken?: string
   ): void;
 }
 
@@ -44,7 +44,10 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
    * by setting axios interceptor on the `Authorization` header
    * @param bearerToken
    */
-  function authenticate(bearerToken: string): void {
+  function authenticate(bearerToken?: string): void {
+    if (!bearerToken) {
+      return;
+    }
     axiosClient.interceptors.request.use((config) => {
       if (!config.headers) {
         config.headers = {};

@@ -68,11 +68,3 @@ export const extractAuth = (jwtSecret: string) => (
   }
   next();
 };
-
-export const authenticateClient = (client: StarphishClient) => (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-
-}
