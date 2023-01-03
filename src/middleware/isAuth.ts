@@ -49,7 +49,7 @@ export const isAuth = (jwtSecret: string) => (/* every microservice will pass th
   }
 };
 
-export const getAuthIfPresent = (jwtSecret: string) => (
+export const extractAuth = (jwtSecret: string) => (
   req: Request,
   res: Response,
   next: NextFunction
