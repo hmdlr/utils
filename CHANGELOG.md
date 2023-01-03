@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://me.github.com/hmdlr/utils/compare/v0.1.8...v0.1.9) (2023-01-03)
+
+
+### Bug Fixes
+
+* add undefined option for bearer ([133d94b](https://me.github.com/hmdlr/utils/commit/133d94bdae8ed757fb6172843f3223c574dc1efa))
+
 ### [0.1.8](https://me.github.com/hmdlr/utils/compare/v0.1.7...v0.1.8) (2023-01-03)
 
 ### [0.1.7](https://me.github.com/hmdlr/utils/compare/v0.1.6...v0.1.7) (2023-01-03)
