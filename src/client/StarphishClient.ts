@@ -7,23 +7,23 @@ const defaultOptions: AxiosRequestConfig = {
 };
 
 export interface StarphishClient {
-  get(
+  get<T>(
     microservice: Microservice,
     uri: string,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse>;
-  post(
-    microservice: Microservice,
-    uri: string,
-    data?: any,
-    options?: AxiosRequestConfig
-  ): Promise<AxiosResponse>;
-  put(
+  ): Promise<T>;
+  post<T>(
     microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse>;
+  ): Promise<T>;
+  put<T>(
+    microservice: Microservice,
+    uri: string,
+    data?: any,
+    options?: AxiosRequestConfig
+  ): Promise<T>;
   delete(
     microservice: Microservice,
     uri: string,
@@ -60,11 +60,11 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     });
   }
 
-  const get = async (
+  const get = async <T>(
     microservice: Microservice,
     uri: string,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
+  ): Promise<T> => {
     const response = await axiosClient.get(
       `${MicroservicePaths[microservice]}${uri}`,
       {
@@ -75,12 +75,12 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     return response.data;
   };
 
-  const post = async (
+  const post = async <T>(
     microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
+  ): Promise<T> => {
     const response = await axiosClient.post(
       `${MicroservicePaths[microservice]}/${uri}`,
       data,
@@ -92,12 +92,12 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     return response.data;
   };
 
-  const put = async (
+  const put = async <T>(
     microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
+  ): Promise<T> => {
     const response = await axiosClient.put(
       `${MicroservicePaths[microservice]}/${uri}`,
       data,
