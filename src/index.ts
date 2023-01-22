@@ -1,6 +1,7 @@
-import { getClient } from './client/StarphishClient';
+import { getInternalClient } from './client/StarphishClient';
 import { UnauthorizedError } from './errors/UnauthorizedError';
 import { getLogger } from './Logger';
+import { DeployedPaths, LocalPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
 
 export {
@@ -8,5 +9,7 @@ export {
   UnauthorizedError,
   isAuth,
   extractAuth,
-  getClient
+  getInternalClient,
+  DeployedPaths,
+  LocalPaths
 };

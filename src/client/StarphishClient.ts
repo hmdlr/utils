@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { MicroservicePaths, Microservice } from '../Microservice';
+import { InternalPaths, Microservice } from '../Microservice';
 
 const defaultOptions: AxiosRequestConfig = {
   method: 'GET',
@@ -38,7 +38,7 @@ export interface StarphishClient {
  * Assumes your environment variables are set up correctly because it's
  * going to make use of **process.env.<microservice_port>'s**
  */
-export const getClient = (axiosClient = axios.create()): StarphishClient => {
+export const getInternalClient = (axiosClient = axios.create()): StarphishClient => {
   /**
    * Authenticates the client with the given bearer token
    * by setting axios interceptor on the `Authorization` header
@@ -54,7 +54,6 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
       }
       /* eslint-disable */
       config.headers['Authorization'] = `Bearer ${bearerToken}`;
-      config.headers['authorization'] = `Bearer ${bearerToken}`;
       /* eslint-enable */
       return config;
     });
@@ -66,7 +65,7 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     options?: AxiosRequestConfig
   ): Promise<T> => {
     const response = await axiosClient.get(
-      `${MicroservicePaths[microservice]}${uri}`,
+      `${InternalPaths[microservice]}/${uri}`,
       {
         ...defaultOptions,
         ...options,
@@ -82,7 +81,7 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     options?: AxiosRequestConfig
   ): Promise<T> => {
     const response = await axiosClient.post(
-      `${MicroservicePaths[microservice]}/${uri}`,
+      `${InternalPaths[microservice]}/${uri}`,
       data,
       {
         ...defaultOptions,
@@ -99,7 +98,7 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     options?: AxiosRequestConfig
   ): Promise<T> => {
     const response = await axiosClient.put(
-      `${MicroservicePaths[microservice]}/${uri}`,
+      `${InternalPaths[microservice]}/${uri}`,
       data,
       {
         ...defaultOptions,
@@ -115,7 +114,7 @@ export const getClient = (axiosClient = axios.create()): StarphishClient => {
     options?: AxiosRequestConfig
   ): Promise<AxiosResponse> => {
     const response = await axiosClient.delete(
-      `${MicroservicePaths[microservice]}/${uri}`,
+      `${InternalPaths[microservice]}/${uri}`,
       {
         ...defaultOptions,
         ...options,
