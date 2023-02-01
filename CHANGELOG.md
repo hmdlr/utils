@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.15](https://me.github.com/hmdlr/utils/compare/v0.1.14...v0.1.15) (2023-02-01)
+
+
+### Bug Fixes
+
+* remove `/api` suffix from all paths ([0fa2392](https://me.github.com/hmdlr/utils/commit/0fa2392deeaf0fff5a612f3937f3f3e596defe88))
+
 ### [0.1.14](https://me.github.com/hmdlr/utils/compare/v0.1.13...v0.1.14) (2023-02-01)
 
 ### [0.1.13](https://me.github.com/hmdlr/utils/compare/v0.1.12...v0.1.13) (2023-01-24)
