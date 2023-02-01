@@ -9,13 +9,13 @@ export const InternalPaths = {
 } as const;
 
 export const DeployedPaths = {
-  [Microservice.Authphish]: 'https://auth.starphish.app/api',
+  [Microservice.Authphish]: 'https://auth.starphish.app',
   [Microservice.Storephish]: 'https://store.starphish.app',
 } as const;
 
 /* eslint-disable max-len */
 export const LocalPaths = {
-  [Microservice.Authphish]: `http://localhost:${process.env.AUTHPHISH_PORT || process.env.REACT_APP_AUTHPHISH_PORT}/api`,
+  [Microservice.Authphish]: `http://localhost:${process.env.AUTHPHISH_PORT || process.env.REACT_APP_AUTHPHISH_PORT}`,
   [Microservice.Storephish]: `http://localhost:${process.env.STOREPHISH_PORT || process.env.REACT_APP_STOREPHISH_PORT}`,
 } as const;
 /* eslint-enable max-len */
