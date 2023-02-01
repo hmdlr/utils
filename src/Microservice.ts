@@ -19,3 +19,9 @@ export const LocalPaths = {
   [Microservice.Storephish]: `http://localhost:${process.env.STOREPHISH_PORT || process.env.REACT_APP_STOREPHISH_PORT}`,
 } as const;
 /* eslint-enable max-len */
+
+/* eslint-disable max-len */
+export const FrontPaths = {
+  [Microservice.Authphish]: `http://localhost:${process.env.FRONTPHISH_PORT || process.env.REACT_APP_FRONTPHISH_PORT}`,
+} as const;
+/* eslint-enable max-len */
