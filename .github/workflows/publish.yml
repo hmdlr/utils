@@ -60,7 +60,7 @@ jobs:
         run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > .npmrc
 
       - name: install and build
-        env:
+        with:
           NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           npm install
