@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "PACKAGE_VERSION=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .version)" >> $GITHUB_ENV ;
           echo "PACKAGE_NAME=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .name)" >> $GITHUB_ENV ;
-          echo "COMMIT_MESSAGE=$(git log -2 --pretty=format:'%s' | awk 'NR==2')" >> $GITHUB_ENV ;
+          echo "COMMIT_MESSAGE=$(git log -2 --pretty=format:'%s' --all | awk 'NR==2')" >> $GITHUB_ENV ;
           echo "---- Debug output ----"
           git log -2 --pretty=format:'%s'
           echo "----------------------"
