@@ -62,10 +62,6 @@ jobs:
       - run: npm i
       - run: npm run build
       - run: npm publish --access public
-        with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
-
 
 #  release-announcement:
 #    needs: update-package
