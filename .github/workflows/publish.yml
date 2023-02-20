@@ -5,10 +5,19 @@ on:
       - main
 
 jobs:
-  create-tag:
+  build:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+
+  create-tag:
+    needs: build
+    runs-on: self-hosted
+    steps:
       - uses: hennejg/github-tag-action@v4.3.1
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
@@ -33,7 +42,6 @@ jobs:
     needs: create-tag
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
       - name: Update package.json
         run: |
           echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV ;
@@ -50,7 +58,7 @@ jobs:
             git push
 
   release-announcement:
-    needs: create-tag
+    needs: update-package
     runs-on: self-hosted
     steps:
       - name: Checkout

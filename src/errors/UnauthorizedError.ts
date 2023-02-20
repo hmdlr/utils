@@ -11,3 +11,10 @@ export class CacaError extends Error {
     this.name = 'CacaError';
   }
 }
+
+export class PepeeError extends Error {
+  constructor(message, public status = 401) {
+    super(message);
+    this.name = 'PepeeError';
+  }
+}

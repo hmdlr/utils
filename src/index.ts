@@ -1,5 +1,5 @@
 import { getInternalClient } from './client/StarphishClient';
-import { CacaError, UnauthorizedError } from './errors/UnauthorizedError';
+import { CacaError, PepeeError, UnauthorizedError } from './errors/UnauthorizedError';
 import { getLogger } from './Logger';
 import { DeployedPaths, FrontPaths, LocalPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
@@ -13,5 +13,6 @@ export {
   DeployedPaths,
   LocalPaths,
   FrontPaths,
-  CacaError
+  CacaError,
+  PepeeError
 };
