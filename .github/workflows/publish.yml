@@ -6,7 +6,6 @@ on:
 
 jobs:
   create-tag:
-    needs: build
     runs-on: self-hosted
     steps:
       - uses: hennejg/github-tag-action@v4.3.1
