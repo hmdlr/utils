@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "PACKAGE_VERSION=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .version)" >> $GITHUB_ENV ;
           echo "PACKAGE_NAME=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .name)" >> $GITHUB_ENV ;
-          echo "COMMIT_MESSAGE=$(git log -2 --pretty=%B)" >> $GITHUB_ENV ;
+          echo "COMMIT_MESSAGE=$(git log -2 --pretty=%B | sed -n 3p)" >> $GITHUB_ENV ;
 
       - name: Release Announcement
         uses: appleboy/telegram-action@master
