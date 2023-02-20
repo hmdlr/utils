@@ -59,7 +59,7 @@ jobs:
       - name: Configure NPM registry authentication
         run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > .npmrc
 
-      - run: npm i
+      - run: npm ci
       - run: npm run build
       - run: npm publish
 
