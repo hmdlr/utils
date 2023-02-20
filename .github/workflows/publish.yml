@@ -48,19 +48,19 @@ jobs:
 #            git commit -m "chore(release): bump to ${{ env.LATEST_TAG }}"
 #            git push
 
-    publish:
-      needs: create-tag
-      runs-on: self-hosted
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 16
-        - run: npm i
-        - run: npm run build
-        - run: npm publish --access public
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  publish:
+    needs: create-tag
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm i
+      - run: npm run build
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
 #  release-announcement:
 #    needs: update-package
