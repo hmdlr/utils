@@ -55,12 +55,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
+
+      - name: Configure NPM registry authentication
+        run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > .npmrc
+
       - run: npm i
       - run: npm run build
-      - uses: JS-DevTools/npm-publish@v1
+      - run: npm publish --access public
         with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          registry: https://npm.pkg.github.com
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
 
 #  release-announcement:
 #    needs: update-package
