@@ -51,22 +51,18 @@ jobs:
     needs: create-tag
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Configure NPM registry authentication
-        run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > .npmrc
-
-      - name: install and build
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.ACCESS_TOKEN }}" > ~/.npmrc
+      - name: Install Node.js and dependencies
+        uses: actions/setup-node@v2
         with:
-          NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          npm install
-          npm run build
-
-      - run: npm publish
+          node-version: '16'
+      - name: Build package
+        run: npm run build
+      - name: Publish package to NPM registry
+        run: npm publish --access public
 
 #  release-announcement:
 #    needs: update-package
