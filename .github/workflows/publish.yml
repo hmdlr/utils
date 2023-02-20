@@ -50,9 +50,12 @@ jobs:
   publish:
     needs: create-tag
     runs-on: self-hosted
+    permissions:
+      packages: write
+      contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Configure NPM registry authentication
         run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > ~/.npmrc
       - name: Install Node.js and dependencies
@@ -69,6 +72,7 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
 
 #  release-announcement:
 #    needs: update-package
