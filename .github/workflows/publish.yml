@@ -17,16 +17,16 @@ jobs:
           echo "PACKAGE_NAME=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .name)" >> $GITHUB_ENV ;
           echo "COMMIT_MESSAGE=$(git log -2 --pretty=format:'%s' --all | awk 'NR==2')" >> $GITHUB_ENV ;
           echo "---- Debug output ----"
-          git log -2 --pretty=format:'%s'
+          git log -2 --pretty=format:'%s' --all
           echo "----------------------"
 
-      - name: Release Announcement
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            😼New utils artifact published😼
-            Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
-            Changelog:
-            ${{ env.COMMIT_MESSAGE }}
+#      - name: Release Announcement
+#        uses: appleboy/telegram-action@master
+#        with:
+#          to: ${{ secrets.TELEGRAM_TO }}
+#          token: ${{ secrets.TELEGRAM_TOKEN }}
+#          message: |
+#            😼New utils artifact published😼
+#            Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
+#            Changelog:
+#            ${{ env.COMMIT_MESSAGE }}
