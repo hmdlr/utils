@@ -56,12 +56,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Configure NPM registry authentication
-        run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > ~/.npmrc
       - name: Install Node.js and dependencies
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com/'
           scope: '@hmdlr'
       - name: Install dependencies
