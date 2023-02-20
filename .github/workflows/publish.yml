@@ -29,4 +29,4 @@ jobs:
             😼New utils artifact published😼
             Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
             Changelog:
-            ${{ env.CHANGELOG }}
+            ${{ github.event.commits[0].message }}
