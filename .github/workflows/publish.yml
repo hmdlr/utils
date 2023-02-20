@@ -55,8 +55,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run build
+      - name: install and build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          npm install
+          npm run build
 
       - name: Configure NPM registry authentication
         run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > .npmrc
