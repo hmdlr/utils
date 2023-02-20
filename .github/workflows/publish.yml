@@ -61,7 +61,7 @@ jobs:
 
       - run: npm i
       - run: npm run build
-      - run: npm publish --access public
+      - run: npm publish
 
 #  release-announcement:
 #    needs: update-package
