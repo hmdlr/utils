@@ -54,7 +54,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Configure NPM registry authentication
-        run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ ACCESS_TOKEN }}" > ~/.npmrc
+        run: echo -e "@hmdlr:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_TOKEN }}" > ~/.npmrc
       - name: Install Node.js and dependencies
         uses: actions/setup-node@v2
         with:
