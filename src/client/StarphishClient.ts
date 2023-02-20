@@ -50,7 +50,8 @@ export const getInternalClient = (axiosClient = axios.create()): StarphishClient
     }
     axiosClient.interceptors.request.use((config) => {
       if (!config.headers) {
-        config.headers = {};
+        // @ts-ignore
+        config.headers = {} as any;
       }
       /* eslint-disable */
       config.headers['Authorization'] = `Bearer ${bearerToken}`;
