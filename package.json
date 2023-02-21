@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://me.github.com/hmdlr/utils"
+    "url": "git+https://github.com/hmdlr/utils"
   },
   "files": [
     "dist"
