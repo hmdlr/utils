@@ -32,6 +32,8 @@ jobs:
     needs: create-tag
     runs-on: self-hosted
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Update package.json
         run: |
           echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV ;
@@ -40,11 +42,15 @@ jobs:
           sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package.json
           sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package-lock.json
       - name: Commit package.json
+        env:
+          CI_COMMIT_MESSAGE: |
+            chore(release): bump to ${{ env.LATEST_TAG }}
+          CI_COMMIT_AUTHOR: CI
         run: |
+            git config --local user.name "${{ env.CI_COMMIT_AUTHOR }}"
             git config --local user.email "cibuddy@users.noreply.github.com"
-            git config --local user.name "CI"
             git add package.json package-lock.json
-            git commit -m "chore(release): bump to ${{ env.LATEST_TAG }}"
+            git commit -m "${CI_COMMIT_MESSAGE}"
             git push
 
   publish:
