@@ -61,6 +61,10 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Delete npmrc
         run: rm .npmrc
       - name: Install Node.js and dependencies
