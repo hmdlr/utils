@@ -34,13 +34,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Update package.json
+      - name: Read latest tag
         run: |
           echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV ;
       - name: Update package.json
         run: |
           sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package.json
-          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package-lock.json
+          sed -i '0,/"version":/s/"version": ".*"/"version": "'${{ env.LATEST_TAG }}'"/' package-lock.json
+
       - name: Commit package.json
         env:
           CI_COMMIT_MESSAGE: |
