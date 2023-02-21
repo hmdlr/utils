@@ -48,7 +48,7 @@ jobs:
             git push
 
   publish:
-    needs: create-tag
+    needs: update-package
     runs-on: self-hosted
     permissions:
       packages: write
@@ -74,7 +74,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
   release-announcement:
-    needs: update-package
+    needs: publish
     runs-on: self-hosted
     steps:
       - name: Checkout
