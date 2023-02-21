@@ -49,7 +49,7 @@ jobs:
           CI_COMMIT_AUTHOR: CI
         run: |
             git config --local user.name "${{ env.CI_COMMIT_AUTHOR }}"
-            git config --local user.email "cibuddy@users.noreply.github.com"
+            git config --local user.email "cristimc8@users.noreply.github.com"
             git add package.json package-lock.json
             git commit -m "${CI_COMMIT_MESSAGE}"
             git push
@@ -61,8 +61,6 @@ jobs:
       packages: write
       contents: read
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Delete npmrc
         run: rm .npmrc
       - name: Install Node.js and dependencies
