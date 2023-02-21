@@ -28,24 +28,24 @@ jobs:
           extra_files: ''
           commit_user_name: github-actions
 
-#  update-package:
-#    needs: create-tag
-#    runs-on: self-hosted
-#    steps:
-#      - name: Update package.json
-#        run: |
-#          echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV ;
-#      - name: Update package.json
-#        run: |
-#          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package.json
-#          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package-lock.json
-#      - name: Commit package.json
-#        run: |
-#            git config --local user.email "cibuddy@users.noreply.github.com"
-#            git config --local user.name "CI"
-#            git add package.json package-lock.json
-#            git commit -m "chore(release): bump to ${{ env.LATEST_TAG }}"
-#            git push
+  update-package:
+    needs: create-tag
+    runs-on: self-hosted
+    steps:
+      - name: Update package.json
+        run: |
+          echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV ;
+      - name: Update package.json
+        run: |
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.LATEST_TAG }}\"/g" package-lock.json
+      - name: Commit package.json
+        run: |
+            git config --local user.email "cibuddy@users.noreply.github.com"
+            git config --local user.name "CI"
+            git add package.json package-lock.json
+            git commit -m "chore(release): bump to ${{ env.LATEST_TAG }}"
+            git push
 
   publish:
     needs: create-tag
@@ -73,25 +73,24 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
+  release-announcement:
+    needs: update-package
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-#  release-announcement:
-#    needs: update-package
-#    runs-on: self-hosted
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: get-package-version
-#        run: |
-#          echo "PACKAGE_VERSION=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .version)" >> $GITHUB_ENV ;
-#          echo "PACKAGE_NAME=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .name)" >> $GITHUB_ENV ;
-#
-#      - name: Release Announcement
-#        uses: appleboy/telegram-action@master
-#        with:
-#          to: ${{ secrets.TELEGRAM_TO }}
-#          token: ${{ secrets.TELEGRAM_TOKEN }}
-#          message: |
-#            😼New utils artifact published😼
-#            Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
-#            🚨${{ github.event.commits[0].message }}🚨
+      - name: get-package-version
+        run: |
+          echo "PACKAGE_VERSION=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .version)" >> $GITHUB_ENV ;
+          echo "PACKAGE_NAME=$(cat ${GITHUB_WORKSPACE}/package.json | jq -r .name)" >> $GITHUB_ENV ;
+
+      - name: Release Announcement
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            😼New utils artifact published😼
+            Artifact: ${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
+            🚨${{ github.event.commits[0].message }}🚨
