@@ -46,10 +46,10 @@ jobs:
         env:
           CI_COMMIT_MESSAGE: |
             chore(release): bump to ${{ env.LATEST_TAG }}
-          CI_COMMIT_AUTHOR: CI
+          CI_COMMIT_AUTHOR: github-actions[bot]
         run: |
             git config --local user.name "${{ env.CI_COMMIT_AUTHOR }}"
-            git config --local user.email "cristimc8@users.noreply.github.com"
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add package.json package-lock.json
             git commit -m "${CI_COMMIT_MESSAGE}"
             git push
