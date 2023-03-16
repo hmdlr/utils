@@ -1,5 +1,6 @@
 import { getInternalClient } from './client/StarphishClient';
-import { CacaError, PepeeError, UnauthorizedError } from './errors/UnauthorizedError';
+import { UnauthorizedError } from './errors/UnauthorizedError';
+import { kafkaConsumeMessage } from './kafka/Handler';
 import { getLogger } from './Logger';
 import { DeployedPaths, FrontPaths, LocalPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
@@ -13,6 +14,5 @@ export {
   DeployedPaths,
   LocalPaths,
   FrontPaths,
-  CacaError,
-  PepeeError
+  kafkaConsumeMessage
 };
