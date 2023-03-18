@@ -3,11 +3,11 @@ import { getLogger } from '../Logger';
 
 const logger = getLogger();
 
-export const kafkaConsumeMessage = (
+export const kafkaConsumeMessage = async (
   topic: string,
   message: KafkaMessage,
   topicHandler: { [topic: string]: (arg: any) => Promise<void> }
-) => async () => {
+) => {
   const handler = topicHandler[topic];
   if (!handler) {
     logger.error(`No handler for topic ${topic}`);
