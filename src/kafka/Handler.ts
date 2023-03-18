@@ -20,5 +20,9 @@ export const kafkaConsumeMessage = async (
     logger.error(`Error parsing message ${message.value.toString()}`);
     return;
   }
-  await handler(parsedMessage);
+  try {
+    await handler(parsedMessage);
+  } catch (e) {
+    logger.error(e);
+  }
 };
