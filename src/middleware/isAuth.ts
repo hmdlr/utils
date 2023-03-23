@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
-import { StarphishClient } from "../client/StarphishClient";
 
 /* eslint-disable @typescript-eslint/dot-notation */
 function getTokenFromRequest(req: Request): string | undefined {
