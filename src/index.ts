@@ -1,4 +1,4 @@
-import { getInternalClient } from './client/StarphishClient';
+import { getInternalClient, StarphishClient } from './client/StarphishClient';
 import { UnauthorizedError } from './errors/UnauthorizedError';
 import { kafkaConsumeMessage } from './kafka/Handler';
 import { getLogger } from './Logger';
@@ -11,6 +11,7 @@ export {
   isAuth,
   extractAuth,
   getInternalClient,
+  StarphishClient,
   DeployedPaths,
   LocalPaths,
   FrontPaths,
