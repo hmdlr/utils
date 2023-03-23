@@ -6,7 +6,7 @@ const defaultOptions: AxiosRequestConfig = {
   headers: { 'Content-Type': 'application/json' },
 };
 
-export interface StarphishClient {
+export interface InternalStarphishClient {
   get<T>(
     microservice: Microservice,
     uri: string,
@@ -38,7 +38,7 @@ export interface StarphishClient {
  * Assumes your environment variables are set up correctly because it's
  * going to make use of **process.env.<microservice_port>'s**
  */
-export const getInternalClient = (axiosClient = axios.create()): StarphishClient => {
+export const getInternalClient = (axiosClient = axios.create()): InternalStarphishClient => {
   /**
    * Authenticates the client with the given bearer token
    * by setting axios interceptor on the `Authorization` header
