@@ -43,6 +43,7 @@ export const isAuth = (jwtSecret: string) => (/* every microservice will pass th
     req['user'] = {};
     req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
     req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
+    req['user'].bearer = bearer;
     next();
   } catch (e) {
     throw new UnauthorizedError('Unauthorized');
