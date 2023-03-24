@@ -1,11 +1,13 @@
 import FormData from 'form-data';
+import { Service } from 'typedi';
 import { getInternalClient, InternalStarphishClient } from '../client/StarphishClient';
 import { Microservice } from '../Microservice';
 
 /**
  * SDK for the storephish microservice
  */
-export class Storephish {
+@Service()
+export default class Storephish {
   private readonly uri = 'store';
 
   constructor(
