@@ -18,13 +18,17 @@ export default class Authphish {
     bearer: string,
     resource: string,
   }): Promise<boolean> {
-    const result = await this.client.get<{
-      hasAccess: boolean
-    }>(
-      Microservice.Authphish,
-      `${this.uri}/groups/access/${resource}`,
-      { headers: { Authorization: `Bearer ${bearer}` } }
-    );
-    return result.hasAccess;
+    try {
+      const result = await this.client.get<{
+        hasAccess: boolean
+      }>(
+        Microservice.Authphish,
+        `${this.uri}/groups/access/${resource}`,
+        { headers: { Authorization: `Bearer ${bearer}` } }
+      );
+      return result.hasAccess;
+    } catch (e) {
+      return false;
+    }
   }
 }
