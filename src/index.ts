@@ -5,6 +5,7 @@ import { getLogger } from './Logger';
 import { DeployedPaths, FrontPaths, LocalPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
 import Authphish from './sdk/Authphish';
+import Scanphish from './sdk/Scanphish';
 import Storephish from './sdk/Storephish';
 
 export {
@@ -19,5 +20,6 @@ export {
   FrontPaths,
   kafkaConsumeMessage,
   Storephish,
-  Authphish
+  Authphish,
+  Scanphish
 };
