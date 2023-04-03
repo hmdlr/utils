@@ -1,4 +1,3 @@
-import { Inject, Service } from 'typedi';
 import { BareClient } from '@hmdlr/types';
 
 export default class Authphish {

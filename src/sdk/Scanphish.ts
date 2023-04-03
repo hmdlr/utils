@@ -1,7 +1,5 @@
-import { Inject, Service } from 'typedi';
 import { BareClient } from '@hmdlr/types';
 
-@Service()
 export default class Scanphish {
   private readonly api = 'api';
 
