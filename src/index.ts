@@ -4,8 +4,8 @@ import { kafkaConsumeMessage } from './kafka/Handler';
 import { getLogger } from './Logger';
 import { DeployedPaths, FrontPaths, LocalPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
-
-export * as sdk from './sdk';
+import Authphish from './sdk/Authphish';
+import Storephish from './sdk/Storephish';
 
 export {
   getLogger,
@@ -17,5 +17,7 @@ export {
   DeployedPaths,
   LocalPaths,
   FrontPaths,
-  kafkaConsumeMessage
+  kafkaConsumeMessage,
+  Storephish,
+  Authphish
 };
