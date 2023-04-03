@@ -4,6 +4,10 @@
   "description": "Utils for StarPhish services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "dist/index.js",
+    "./sdk": "dist/sdk/index.js"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf dist"
