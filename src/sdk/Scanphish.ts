@@ -2,7 +2,7 @@ import { Service } from 'typedi';
 import { BareClient } from '@hmdlr/types';
 
 @Service()
-export default class Authphish {
+export default class Scanphish {
   private readonly api = 'api';
 
   constructor(

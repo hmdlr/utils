@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { BareClient } from '@hmdlr/types';
 import { InternalPaths, Microservice } from '../Microservice';
 
 const defaultOptions: AxiosRequestConfig = {
@@ -6,62 +7,37 @@ const defaultOptions: AxiosRequestConfig = {
   headers: { 'Content-Type': 'application/json' },
 };
 
-export interface InternalStarphishClient {
+export interface InternalStarphishClient extends BareClient {
   get<T>(
-    microservice: Microservice,
     uri: string,
     options?: AxiosRequestConfig
   ): Promise<T>;
   post<T>(
-    microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
   ): Promise<T>;
   put<T>(
-    microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
   ): Promise<T>;
-  delete(
-    microservice: Microservice,
+  delete<T>(
     uri: string,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse>;
-  authenticate(
-    bearerToken?: string
-  ): void;
+  ): Promise<T>;
 }
 
 /**
- * Assumes your environment variables are set up correctly because it's
- * going to make use of **process.env.<microservice_port>'s**
+ * Returns a client for internal microservices
+ * @param microservice The microservice to target. Works like a base URL
+ * @param axiosClient The axios client to use. Defaults to a new instance
  */
-export const getInternalClient = (axiosClient = axios.create()): InternalStarphishClient => {
-  /**
-   * Authenticates the client with the given bearer token
-   * by setting axios interceptor on the `Authorization` header
-   * @param bearerToken
-   */
-  function authenticate(bearerToken?: string): void {
-    if (!bearerToken) {
-      return;
-    }
-    axiosClient.interceptors.request.use((config) => {
-      if (!config.headers) {
-        // @ts-ignore
-        config.headers = {} as any;
-      }
-      /* eslint-disable */
-      config.headers['Authorization'] = `Bearer ${bearerToken}`;
-      /* eslint-enable */
-      return config;
-    });
-  }
-
+export const getInternalClient = (
+  microservice: Microservice,
+  axiosClient = axios.create()
+): InternalStarphishClient => {
   const get = async <T>(
-    microservice: Microservice,
     uri: string,
     options?: AxiosRequestConfig
   ): Promise<T> => {
@@ -76,7 +52,6 @@ export const getInternalClient = (axiosClient = axios.create()): InternalStarphi
   };
 
   const post = async <T>(
-    microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
@@ -93,7 +68,6 @@ export const getInternalClient = (axiosClient = axios.create()): InternalStarphi
   };
 
   const put = async <T>(
-    microservice: Microservice,
     uri: string,
     data?: any,
     options?: AxiosRequestConfig
@@ -109,11 +83,10 @@ export const getInternalClient = (axiosClient = axios.create()): InternalStarphi
     return response.data;
   };
 
-  const deleteReq = async (
-    microservice: Microservice,
+  const deleteReq = async<T> (
     uri: string,
     options?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
+  ): Promise<T> => {
     const response = await axiosClient.delete(
       `${InternalPaths[microservice]}/${uri}`,
       {
@@ -129,6 +102,5 @@ export const getInternalClient = (axiosClient = axios.create()): InternalStarphi
     post,
     put,
     delete: deleteReq,
-    authenticate,
   };
 };

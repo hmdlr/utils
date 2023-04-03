@@ -1,6 +1,6 @@
 import FormData from 'form-data';
 import { Service } from 'typedi';
-import { getInternalClient, InternalStarphishClient } from '../client/StarphishClient';
+import { BareClient } from '@hmdlr/types';
 import { Microservice } from '../Microservice';
 
 /**
@@ -8,10 +8,10 @@ import { Microservice } from '../Microservice';
  */
 @Service()
 export default class Storephish {
-  private readonly uri = 'store';
+  private readonly api = 'store';
 
   constructor(
-    private client: InternalStarphishClient = getInternalClient()
+    private client: BareClient
   ) {}
 
   /**
@@ -31,8 +31,7 @@ export default class Storephish {
     const result = await this.client.post<{
       savedPaths: string[]
     }>(
-      Microservice.Storephish,
-      `${this.uri}/storage`,
+      `${this.api}/storage`,
       formData,
       {
         headers: {
