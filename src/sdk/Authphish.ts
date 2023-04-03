@@ -27,4 +27,21 @@ export default class Authphish {
       return false;
     }
   }
+
+  public async authenticate({
+    username,
+    password,
+  }:
+  {
+    username: string,
+    password: string,
+  }): Promise<{ token: string }> {
+    return this.client.post<{ token: string }>(
+      `${this.api}/auth`,
+      {
+        username,
+        password,
+      }
+    );
+  }
 }
