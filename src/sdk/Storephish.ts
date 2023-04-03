@@ -1,7 +1,6 @@
 import FormData from 'form-data';
-import { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
 import { BareClient } from '@hmdlr/types';
-import { Microservice } from '../Microservice';
 
 /**
  * SDK for the storephish microservice
@@ -11,7 +10,7 @@ export default class Storephish {
   private readonly api = 'store';
 
   constructor(
-    private client: BareClient
+    @Inject() private client: BareClient
   ) {}
 
   /**

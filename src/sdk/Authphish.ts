@@ -1,4 +1,4 @@
-import { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
 import { BareClient } from '@hmdlr/types';
 
 @Service()
@@ -6,7 +6,7 @@ export default class Authphish {
   private readonly api = 'api';
 
   constructor(
-    private client: BareClient
+    @Inject() private client: BareClient
   ) {}
 
   public async hasPermission({

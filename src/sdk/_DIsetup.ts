@@ -6,6 +6,6 @@ import Authphish from './Authphish';
  * Sets up the dependency injection container
  */
 export default () => {
-  Container.set('Storephish', new Storephish());
-  Container.set('Authphish', new Authphish());
+  Container.set('Storephish', Storephish);
+  Container.set('Authphish', Authphish);
 };
