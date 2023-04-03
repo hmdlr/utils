@@ -6,9 +6,6 @@ import { DeployedPaths, FrontPaths, LocalPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
 import Authphish from './sdk/Authphish';
 import Storephish from './sdk/Storephish';
-import _DIsetup from './sdk/_DIsetup';
-
-_DIsetup();
 
 export {
   getLogger,

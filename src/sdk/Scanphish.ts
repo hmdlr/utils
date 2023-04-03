@@ -6,7 +6,7 @@ export default class Scanphish {
   private readonly api = 'api';
 
   constructor(
-    @Inject() private client: BareClient
+    private client: BareClient
   ) {}
 
   // public async hasPermission({
