@@ -26,9 +26,7 @@ export default class Storephish {
     formData: FormData,
   }): Promise<Array<string>> {
     formData.append('path', path);
-    const result = await this.client.post<{
-      savedPaths: string[]
-    }>(
+    const result = await this.client.post<string[]>(
       `${this.api}/storage`,
       formData,
       {
@@ -38,6 +36,6 @@ export default class Storephish {
         },
       }
     );
-    return result.savedPaths;
+    return result;
   }
 }
