@@ -24,7 +24,7 @@ export default class Storephish {
   {
     bearer: string,
     formData: FormData,
-  }): Promise<Array<string> | T> {
+  }): Promise<Array<string>> {
     const result = await this.client.post<{
       savedPaths: string[]
     }>(
@@ -37,6 +37,6 @@ export default class Storephish {
         },
       }
     );
-    return result.savedPaths ?? result as T;
+    return result.savedPaths;
   }
 }
