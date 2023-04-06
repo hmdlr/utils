@@ -17,7 +17,7 @@ export default class Storephish {
    * @param bearer
    * @param formData
    */
-  public async upload<T>({
+  public async upload<T>(path: string, {
     bearer,
     formData,
   }:
@@ -25,6 +25,7 @@ export default class Storephish {
     bearer: string,
     formData: FormData,
   }): Promise<Array<string>> {
+    formData.append('path', path);
     const result = await this.client.post<{
       savedPaths: string[]
     }>(
