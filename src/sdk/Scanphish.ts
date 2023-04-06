@@ -23,10 +23,11 @@ export default class Scanphish {
   public async enhanceBrand(brandId: string): Promise<{
     candidates: string[]
   }> {
-    return this.client.get<{
+    return this.client.post<{
       candidates: string[]
     }>(
-      `${this.api}/brand/enhance/${brandId}`
+      `${this.api}/brand/enhance/${brandId}`,
+      {}
     );
   }
 
