@@ -1,7 +1,16 @@
-import { BareClient, Collection, IBrand, IBrandCreatePayload } from '@hmdlr/types';
+import {
+  BareClient, buildPagedRequest,
+  Collection,
+  IBrand,
+  IBrandCreatePayload, IConfig,
+  PagedRequest,
+  PagedResults, Resource
+} from '@hmdlr/types';
 
 export default class Scanphish {
   private readonly api = 'api';
+
+  private readonly configsApi = `${this.api}/config`;
 
   constructor(
     private client: BareClient
@@ -36,5 +45,11 @@ export default class Scanphish {
       `${this.api}/brand`,
       brand
     );
+  }
+
+  public async listConfigs(request: PagedRequest, includeBrands = false) {
+    return this.client.get<PagedResults<IConfig>>(
+      `${this.configsApi}/?includeBrands=${includeBrands}&${buildPagedRequest(request)}`
+    ).then(PagedResults.fromPagedJson as any);
   }
 }
