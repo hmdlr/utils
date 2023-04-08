@@ -1,3 +1,4 @@
+import { bearerAuth } from './client/InternalStarphishOptions';
 import { getInternalClient, InternalStarphishClient } from './client/StarphishClient';
 import { UnauthorizedError } from './errors/UnauthorizedError';
 import { kafkaConsumeMessage } from './kafka/Handler';
@@ -15,6 +16,7 @@ export {
   extractAuth,
   getInternalClient,
   InternalStarphishClient,
+  bearerAuth,
   DeployedPaths,
   LocalPaths,
   FrontPaths,
