@@ -1,4 +1,4 @@
-import { BareClient } from '@hmdlr/types';
+import { BareClient, PagedResults, Resource } from '@hmdlr/types';
 
 export default class Authphish {
   private readonly api = 'api';
@@ -42,6 +42,14 @@ export default class Authphish {
         username,
         password,
       }
+    );
+  }
+
+  /* ===================== */
+  /* Groups */
+  public async listUserRootResources() {
+    return this.client.get<PagedResults<Resource>>(
+      `${this.api}/groups/root-resources`
     );
   }
 }
