@@ -1,7 +1,9 @@
-import { BareClient, PagedResults, Resource } from '@hmdlr/types';
+import { BareClient, buildPagedRequest, PagedRequest, PagedResults, Resource } from '@hmdlr/types';
 
 export default class Authphish {
   private readonly api = 'api';
+
+  private readonly groupsApi = `${this.api}/groups`;
 
   constructor(
     private client: BareClient
@@ -47,9 +49,9 @@ export default class Authphish {
 
   /* ===================== */
   /* Groups */
-  public async listUserRootResources() {
+  public async listUserRootResources(request: PagedRequest) {
     return this.client.get<PagedResults<Resource>>(
-      `${this.api}/groups/root-resources`
+      `${this.groupsApi}/root-resources?${buildPagedRequest(request)}`
     );
   }
 }
