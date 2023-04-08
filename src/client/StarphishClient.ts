@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { BareClient } from '@hmdlr/types';
 import { InternalPaths, Microservice } from '../Microservice';
 
