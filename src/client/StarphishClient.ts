@@ -26,6 +26,7 @@ export interface InternalStarphishClient extends BareClient {
     uri: string,
     options?: AxiosRequestConfig
   ): Promise<T>;
+  using(options: AxiosRequestConfig): InternalStarphishClient;
 }
 
 /**
@@ -97,10 +98,15 @@ export const getInternalClient = (
     return response.data;
   };
 
+  const using = (options: AxiosRequestConfig): InternalStarphishClient => (
+    getInternalClient(microservice, axios.create(options))
+  );
+
   return {
     get,
     post,
     put,
     delete: deleteReq,
+    using,
   };
 };
