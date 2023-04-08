@@ -13,7 +13,9 @@ export default class Storephish {
 
   /**
    * Uploads a file to the storephish microservice<br>
-   * Returns the saved paths of the uploaded files
+   * Returns the saved paths of the uploaded files in the form of a map
+   * where the key is the name of the file provided in "filename" and the
+   * value is the path
    * @param bearer
    * @param formData
    */
@@ -24,9 +26,9 @@ export default class Storephish {
   {
     bearer: string,
     formData: FormData,
-  }): Promise<Array<string>> {
+  }): Promise<Record<string, string>> {
     formData.append('path', path);
-    const result = await this.client.post<string[]>(
+    const result = await this.client.post<Record<string, string>>(
       `${this.api}/storage`,
       formData,
       {
