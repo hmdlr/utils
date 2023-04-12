@@ -2,10 +2,11 @@ import {
   BareClient, buildPagedRequest,
   Collection,
   IBrand,
-  IBrandCreatePayload, IConfig,
+  IBrandCreatePayload, IConfig, IConfigCreatePayload,
   PagedRequest,
   PagedResults, Resource
 } from '@hmdlr/types';
+import FormData from 'form-data';
 
 export default class Scanphish {
   private readonly api = 'api';
@@ -59,6 +60,28 @@ export default class Scanphish {
     return this.client.get<PagedResults<IConfig>>(
       `${this.configsApi}/?includeBrands=${includeBrands}&${buildPagedRequest(request)}`
     ).then(PagedResults.fromPagedJson as any);
+  }
+
+  /**
+   * Creates a new config
+   * @param config
+   */
+  public async createConfig(config: IConfigCreatePayload): Promise<IConfig> {
+    // form data containing logo and name
+    const formData = new FormData();
+    formData.append('name', config.name);
+    if (config.logo) {
+      formData.append('logo', config.logo.buffer, {
+        filename: 'logo',
+        contentType: config.logo.mimetype,
+      });
+    }
+
+    return this.client.post<IConfig>(
+      `${this.configsApi}`,
+      formData,
+      { headers: { ...formData.getHeaders() } }
+    );
   }
 
   /**
