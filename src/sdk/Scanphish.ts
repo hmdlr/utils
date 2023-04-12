@@ -65,16 +65,13 @@ export default class Scanphish {
   /**
    * Creates a new config
    * @param config
-   */
+   */ // todo: creation does not require a logo
   public async createConfig(config: IConfigCreatePayload): Promise<IConfig> {
     // form data containing logo and name
     const formData = new FormData();
     formData.append('name', config.name);
     if (config.logo) {
-      formData.append('logo', config.logo.buffer, {
-        filename: 'logo',
-        contentType: config.logo.mimetype,
-      });
+      formData.append('logo', config.logo.buffer);
     }
 
     return this.client.post<IConfig>(
