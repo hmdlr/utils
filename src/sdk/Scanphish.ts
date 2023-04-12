@@ -69,18 +69,14 @@ export default class Scanphish {
   public async createConfig(config: IConfigCreatePayload): Promise<IConfig> {
     // form data containing logo and name
     const formData = new FormData();
-    formData.append('name', config.name, { contentType: 'text/plain' });
+    formData.append('name', config.name);
     if (config.logo) {
-      formData.append('logo', config.logo.buffer, {
-        contentType: config.logo.mimetype,
-        filename: 'logo',
-      });
+      formData.append('logo', config.logo.buffer, 'logo');
     }
 
     return this.client.post<IConfig>(
       `${this.configsApi}`,
-      formData,
-      { headers: { ...formData.getHeaders() } }
+      formData
     );
   }
 
