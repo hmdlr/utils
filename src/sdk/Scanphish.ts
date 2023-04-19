@@ -55,10 +55,16 @@ export default class Scanphish {
    * Returns a list of all the configs the user has access to
    * @param request
    * @param includeBrands
+   * @param publicOnly
    */
-  public async listConfigs(request: PagedRequest, includeBrands = false) {
+  public async listConfigs(
+    request: PagedRequest,
+    includeBrands = false,
+    publicOnly = false
+  ) {
     return this.client.get<PagedResults<IConfig>>(
-      `${this.configsApi}/?includeBrands=${includeBrands}&${buildPagedRequest(request)}`
+      // eslint-disable-next-line max-len
+      `${this.configsApi}/?includeBrands=${includeBrands}&publicOnly=${publicOnly}&${buildPagedRequest(request)}`
     ).then(PagedResults.fromPagedJson as any);
   }
 
