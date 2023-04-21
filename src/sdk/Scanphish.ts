@@ -18,9 +18,11 @@ export default class Scanphish {
 
   constructor(
     private client: BareClient
-  ) {}
+  ) {
+  }
 
   /* ===================== */
+
   /* Scans */
   public async scan(
     collection: Collection
@@ -32,6 +34,7 @@ export default class Scanphish {
   }
 
   /* ===================== */
+
   /* Brands */
 
   /**
@@ -68,10 +71,12 @@ export default class Scanphish {
   public async listBrands(request: PagedRequest) {
     return this.client.get<PagedResults<IBrand>>(
       `${this.api}/brand?${buildPagedRequest(request)}`
-    ).then(PagedResults.fromPagedJson as any);
+    )
+      .then(PagedResults.fromPagedJson as any);
   }
 
   /* ===================== */
+
   /* Configs */
 
   /**
@@ -88,7 +93,8 @@ export default class Scanphish {
     return this.client.get<PagedResults<IConfig>>(
       // eslint-disable-next-line max-len
       `${this.configsApi}/?includeBrands=${includeBrands}&publicOnly=${publicOnly}&${buildPagedRequest(request)}`
-    ).then(PagedResults.fromPagedJson as any);
+    )
+      .then(PagedResults.fromPagedJson as any);
   }
 
   /**
@@ -106,6 +112,16 @@ export default class Scanphish {
     return this.client.post<IConfig>(
       `${this.configsApi}`,
       formData
+    );
+  }
+
+  /**
+   * Returns a config
+   * @param configId
+   */
+  public async getConfig(configId: string) {
+    return this.client.get<IConfig>(
+      `${this.configsApi}/${configId}`
     );
   }
 
