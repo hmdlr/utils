@@ -1,10 +1,13 @@
 import {
-  BareClient, buildPagedRequest,
+  BareClient,
+  buildPagedRequest,
   Collection,
   IBrand,
-  IBrandCreatePayload, IConfig, IConfigCreatePayload,
+  IBrandCreatePayload,
+  IConfig,
+  IConfigCreatePayload,
   PagedRequest,
-  PagedResults, Resource
+  PagedResults
 } from '@hmdlr/types';
 import FormData from 'form-data';
 
@@ -30,6 +33,12 @@ export default class Scanphish {
 
   /* ===================== */
   /* Brands */
+
+  /**
+   * Sends a crawler to the auth page and extract page layout, favicon and possible logos
+   * @param brandId
+   * @returns {Promise<{candidates: string[]}>} A list of possible logos
+   */
   public async enhanceBrand(brandId: string): Promise<{
     candidates: string[]
   }> {
@@ -41,11 +50,25 @@ export default class Scanphish {
     );
   }
 
+  /**
+   * Creates a new brand
+   * @param brand
+   */
   public async createBrand(brand: IBrandCreatePayload): Promise<IBrand> {
     return this.client.post<IBrand>(
       `${this.api}/brand`,
       brand
     );
+  }
+
+  /**
+   * Returns a list of all the brands the user has access to
+   * @param request
+   */
+  public async listBrands(request: PagedRequest) {
+    return this.client.get<PagedResults<IBrand>>(
+      `${this.api}/brand?${buildPagedRequest(request)}`
+    ).then(PagedResults.fromPagedJson as any);
   }
 
   /* ===================== */
