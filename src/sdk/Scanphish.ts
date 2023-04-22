@@ -116,6 +116,18 @@ export default class Scanphish {
   }
 
   /**
+   * Will replace the current config's rulesets with the provided ones
+   * @param configId
+   * @param rulesets
+   */
+  public async addRulesetsToConfig(configId: string, rulesets: string[]) {
+    return this.client.put<void>(
+      `${this.configsApi}/${configId}/brands`,
+      { brands: rulesets }
+    );
+  }
+
+  /**
    * Returns a config
    * @param configId
    */
