@@ -3,7 +3,7 @@ import {
   buildPagedRequest,
   Collection,
   IBrand,
-  IBrandCreatePayload,
+  IBrandCreatePayload, IBrandUpdatePayload,
   IConfig,
   IConfigCreatePayload,
   PagedRequest,
@@ -61,6 +61,16 @@ export default class Scanphish {
     return this.client.post<{ brand: IBrand }>(
       `${this.api}/brand`,
       brand
+    );
+  }
+
+  public async updateBrand(
+    brandId: string,
+    payload: IBrandUpdatePayload
+  ): Promise<{ brand: IBrand }> {
+    return this.client.put<{ brand: IBrand }>(
+      `${this.api}/brand/${brandId}`,
+      payload
     );
   }
 
