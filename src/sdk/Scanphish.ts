@@ -57,8 +57,8 @@ export default class Scanphish {
    * Creates a new brand
    * @param brand
    */
-  public async createBrand(brand: IBrandCreatePayload): Promise<IBrand> {
-    return this.client.post<IBrand>(
+  public async createBrand(brand: IBrandCreatePayload): Promise<{ brand: IBrand }> {
+    return this.client.post<{ brand: IBrand }>(
       `${this.api}/brand`,
       brand
     );
