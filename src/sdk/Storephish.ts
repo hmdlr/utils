@@ -43,7 +43,8 @@ export default class Storephish {
 
   get(id: string): Promise<any> {
     return this.client.get<any>(
-      `${this.api}/storage/${id}`
+      `${this.api}/storage/${id}`,
+      { responseType: 'arraybuffer' }
     );
   }
 }
