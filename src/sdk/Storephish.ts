@@ -40,4 +40,10 @@ export default class Storephish {
     );
     return result;
   }
+
+  get(id: string): Promise<any> {
+    return this.client.get<any>(
+      `${this.api}/storage/${id}`
+    );
+  }
 }
