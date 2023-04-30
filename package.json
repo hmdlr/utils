@@ -1,6 +1,6 @@
 {
   "name": "@hmdlr/utils",
-  "version": "0.1.117",
+  "version": "0.1.118",
   "description": "Utils for StarPhish services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
