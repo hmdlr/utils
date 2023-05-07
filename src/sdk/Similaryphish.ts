@@ -1,4 +1,4 @@
-import { BareClient, SimilarityPayload, SimilarityResult } from '@hmdlr/types';
+import { BareClient, ComputedCollection, SimilarityPayload, SimilarityResult } from '@hmdlr/types';
 
 export default class Similaryphish {
   private readonly api = 'api';
@@ -27,6 +27,17 @@ export default class Similaryphish {
   ): Promise<SimilarityResult> {
     return this.client.post<SimilarityResult>(
       `${this.layoutApi}`,
+      payload
+    );
+  }
+
+  public async predict(payload: ComputedCollection): Promise<{
+    prediction: any,
+  }> {
+    return this.client.post<{
+      prediction: any,
+    }>(
+      `${this.api}/predict`,
       payload
     );
   }

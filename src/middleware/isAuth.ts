@@ -22,7 +22,8 @@ function getTokenFromRequest(req: Request): string | undefined {
  * <pre>
  * {
  *   id: string,
- *   username: string
+ *   username: string,
+ *   bearer: string,
  * }
  * </pre>
  * @param jwtSecret
