@@ -1,5 +1,6 @@
 import { bearerAuth } from './client/InternalStarphishOptions';
 import { getInternalClient, InternalStarphishClient } from './client/StarphishClient';
+import { getCDNPath } from './CommonMappers';
 import { UnauthorizedError } from './errors/UnauthorizedError';
 import { kafkaConsumeMessage } from './kafka/Handler';
 import { getLogger } from './Logger';
@@ -25,5 +26,6 @@ export {
   Storephish,
   Authphish,
   Scanphish,
-  Similaryphish
+  Similaryphish,
+  getCDNPath
 };
