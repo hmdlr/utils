@@ -1,24 +1,24 @@
 /**
  * Get the CDN path for a given path
- * @param storephishApi The storephish API URL (e.g. https://store.starphish.app/api)
+ * @param storephishBase The storephish Base URL (e.g. https://store.starphish.app)
  * @param path
  */
-export const getCDNPath = (storephishApi: string, path: string) => {
+export const getCDNPath = (storephishBase: string, path: string) => {
   if (!path) {
-    return `${storephishApi}/storage/static/404.svg`;
+    return `${storephishBase}/api/storage/static/404.svg`;
   }
   let foundPath: string | undefined;
   if (path.startsWith('http')) {
     foundPath = path;
   } if (path.startsWith('/storage')) {
-    foundPath = `${storephishApi}${path}`;
+    foundPath = `${storephishBase}/api${path}`;
   } if (path.startsWith('/static')) {
-    foundPath = `${storephishApi}/storage${path}`;
+    foundPath = `${storephishBase}/api/storage${path}`;
   }
   if (path.startsWith('/')) {
-    foundPath = `${storephishApi}/storage${path}`;
+    foundPath = `${storephishBase}/api/storage${path}`;
   }
-  foundPath = `${storephishApi}/storage/${path}`;
+  foundPath = `${storephishBase}/api/storage/${path}`;
 
   // replace all double slashes with single slash, with the exception of ://
   return foundPath.replace(/([^:]\/)\/+/g, '$1');
