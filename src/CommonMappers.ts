@@ -10,15 +10,15 @@ export const getCDNPath = (storephishBase: string, path: string) => {
   let foundPath: string | undefined;
   if (path.startsWith('http')) {
     foundPath = path;
-  } if (path.startsWith('/storage')) {
+  } else if (path.startsWith('/storage')) {
     foundPath = `${storephishBase}/api${path}`;
-  } if (path.startsWith('/static')) {
+  } else if (path.startsWith('/static')) {
     foundPath = `${storephishBase}/api/storage${path}`;
-  }
-  if (path.startsWith('/')) {
+  } else if (path.startsWith('/')) {
     foundPath = `${storephishBase}/api/storage${path}`;
+  } else {
+    foundPath = `${storephishBase}/api/storage/${path}`;
   }
-  foundPath = `${storephishBase}/api/storage/${path}`;
 
   // replace all double slashes with single slash, with the exception of ://
   return foundPath.replace(/([^:]\/)\/+/g, '$1');
