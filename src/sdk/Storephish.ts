@@ -5,7 +5,7 @@ import { BareClient } from '@hmdlr/types';
  * SDK for the storephish microservice
  */
 export default class Storephish {
-  private readonly api = 'store';
+  private readonly api = 'api';
 
   constructor(
     private client: BareClient
