@@ -4,12 +4,18 @@ import { UnauthorizedError } from '../errors/UnauthorizedError';
 
 /* eslint-disable @typescript-eslint/dot-notation */
 function getTokenFromRequest(req: Request): string | undefined {
+  /* We need to keep using auth headers for the extension, which places auth in request */
   let authHeader: string | string[] = req.headers['Authorization'] || req.headers['authorization'];
   if (Array.isArray(authHeader)) {
     [authHeader] = authHeader;
   }
   if (authHeader && authHeader.split(' ')[0] === 'Bearer') {
     return authHeader.split(' ')[1];
+  }
+
+  /* If the token is not in the Authorization header, check the cookies */
+  if (req.cookies && req.cookies['token']) {
+    return req.cookies['token'];
   }
   return undefined;
 }
@@ -41,9 +47,10 @@ export const isAuth = (jwtSecret: string) => (/* every microservice will pass th
     throw new UnauthorizedError('Unauthorized');
   }
   try {
+    const verifiedToken = jwt.verify(bearer, jwtSecret) as any;
     req['user'] = {};
-    req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
-    req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
+    req['user'].id = verifiedToken.id;
+    req['user'].username = verifiedToken.username;
     req['user'].bearer = bearer;
     next();
   } catch (e) {
@@ -59,9 +66,10 @@ export const extractAuth = (jwtSecret: string) => (
   const bearer = getTokenFromRequest(req);
   if (bearer) {
     try {
+      const verifiedToken = jwt.verify(bearer, jwtSecret) as any;
       req['user'] = {};
-      req['user'].id = (jwt.verify(bearer, jwtSecret) as any).id;
-      req['user'].username = (jwt.verify(bearer, jwtSecret) as any).username;
+      req['user'].id = verifiedToken.id;
+      req['user'].username = verifiedToken.username;
       req['user'].bearer = bearer;
     } catch (e) {
       // do nothing
