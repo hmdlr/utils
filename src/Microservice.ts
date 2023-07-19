@@ -12,19 +12,13 @@ export const InternalPaths = {
   [Microservice.Similaryphish]: `http://similaryphish:${process.env.SIMILARYPHISH_PORT}`,
 } as const;
 
-export const DeployedPaths = {
-  [Microservice.Authphish]: 'https://auth.starphish.app',
-  [Microservice.Storephish]: 'https://store.starphish.app',
-  [Microservice.Scanphish]: 'https://scan.starphish.app',
-} as const;
+const baseDomain = process.env.NODE_ENV === 'production' ? 'starphish.app' : 'ci.starphish.app';
 
-/* eslint-disable max-len */
-export const LocalPaths = {
-  [Microservice.Authphish]: `http://localhost:${process.env.AUTHPHISH_PORT || process.env.REACT_APP_AUTHPHISH_PORT}`,
-  [Microservice.Storephish]: `http://localhost:${process.env.STOREPHISH_PORT || process.env.REACT_APP_STOREPHISH_PORT}`,
-  [Microservice.Scanphish]: `http://localhost:${process.env.SCANPHISH_PORT || process.env.REACT_APP_SCANPHISH_PORT}`,
+export const DeployedPaths = {
+  [Microservice.Authphish]: `http://auth.${baseDomain}`,
+  [Microservice.Storephish]: `http://store.${baseDomain}`,
+  [Microservice.Scanphish]: `http://scan.${baseDomain}`,
 } as const;
-/* eslint-enable max-len */
 
 /* eslint-disable max-len */
 export const FrontPaths = { [Microservice.Authphish]: `http://localhost:${process.env.FRONTPHISH_PORT || process.env.REACT_APP_FRONTPHISH_PORT}` } as const;

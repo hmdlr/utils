@@ -4,7 +4,7 @@ import { getCDNPath } from './CommonMappers';
 import { UnauthorizedError } from './errors/UnauthorizedError';
 import { kafkaConsumeMessage } from './kafka/Handler';
 import { getLogger } from './Logger';
-import { DeployedPaths, FrontPaths, LocalPaths } from './Microservice';
+import { DeployedPaths, FrontPaths } from './Microservice';
 import { extractAuth, isAuth } from './middleware/isAuth';
 import Authphish from './sdk/Authphish';
 import Scanphish from './sdk/Scanphish';
@@ -20,7 +20,6 @@ export {
   InternalStarphishClient,
   bearerAuth,
   DeployedPaths,
-  LocalPaths,
   FrontPaths,
   kafkaConsumeMessage,
   Storephish,
