@@ -21,5 +21,8 @@ export const DeployedPaths = {
 } as const;
 
 /* eslint-disable max-len */
-export const FrontPaths = { [Microservice.Authphish]: `http://localhost:${process.env.FRONTPHISH_PORT || process.env.REACT_APP_FRONTPHISH_PORT}` } as const;
+export const FrontPaths = {
+  auth: `http://${baseDomain}`,
+  workspace: `http://workspace.${baseDomain}`,
+} as const;
 /* eslint-enable max-len */
