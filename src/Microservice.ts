@@ -13,16 +13,17 @@ export const InternalPaths = {
 } as const;
 
 const baseDomain = process.env.NODE_ENV === 'production' ? 'starphish.app' : 'ci.starphish.app';
+const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
 export const DeployedPaths = {
-  [Microservice.Authphish]: `http://auth.${baseDomain}`,
-  [Microservice.Storephish]: `http://store.${baseDomain}`,
-  [Microservice.Scanphish]: `http://scan.${baseDomain}`,
+  [Microservice.Authphish]: `${protocol}://auth.${baseDomain}`,
+  [Microservice.Storephish]: `${protocol}://store.${baseDomain}`,
+  [Microservice.Scanphish]: `${protocol}://scan.${baseDomain}`,
 } as const;
 
 /* eslint-disable max-len */
 export const FrontPaths = {
-  auth: `http://${baseDomain}`,
-  workspace: `http://workspace.${baseDomain}`,
+  auth: `${protocol}://${baseDomain}`,
+  workspace: `${protocol}://workspace.${baseDomain}`,
 } as const;
 /* eslint-enable max-len */
