@@ -12,7 +12,9 @@ export const InternalPaths = {
   [Microservice.Similaryphish]: `http://similaryphish:${process.env.SIMILARYPHISH_PORT}`,
 } as const;
 
-const baseDomain = process.env.NODE_ENV === 'production' ? 'starphish.app' : 'ci.starphish.app';
+const baseDomain = process.env.NODE_ENV === 'production'
+  ? 'starphish.app'
+  : 'starphish.app.localhost';
 const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
 export const DeployedPaths = {
