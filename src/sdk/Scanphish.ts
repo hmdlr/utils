@@ -15,6 +15,7 @@ export default class Scanphish {
   private readonly api = 'api';
 
   private readonly configsApi = `${this.api}/config`;
+  private readonly scanApi = `${this.api}/scan`;
 
   constructor(
     private client: BareClient
@@ -28,7 +29,7 @@ export default class Scanphish {
     collection: Collection
   ): Promise<any> {
     return this.client.post<any>(
-      `${this.api}/scan`,
+      `${this.scanApi}`,
       collection
     );
   }
@@ -183,7 +184,7 @@ export default class Scanphish {
    */
   public async info(websiteDomain: string): Promise<WebsiteInfo> {
     return this.client.get<WebsiteInfo>(
-      `${this.api}/info`,
+      `${this.scanApi}/info`,
       { url: websiteDomain }
     );
   }
