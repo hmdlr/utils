@@ -7,7 +7,7 @@ import {
   IConfig,
   IConfigCreatePayload,
   PagedRequest,
-  PagedResults
+  PagedResults, WebsiteInfo
 } from '@hmdlr/types';
 import FormData from 'form-data';
 
@@ -174,6 +174,17 @@ export default class Scanphish {
   public async deletePreset(configId: string) {
     return this.client.delete<void>(
       `${this.configsApi}/preset/${configId}`
+    );
+  }
+
+  /**
+   * Retrieves the info for a given website
+   * @param websiteDomain
+   */
+  public async info(websiteDomain: string): Promise<WebsiteInfo> {
+    return this.client.get<WebsiteInfo>(
+      `${this.api}/info`,
+      { url: websiteDomain }
     );
   }
 }

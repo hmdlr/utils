@@ -30,7 +30,7 @@
     "typescript": "^4.8.4"
   },
   "peerDependencies": {
-    "@hmdlr/types": "^2.2.65",
+    "@hmdlr/types": "^2.2.70",
     "axios": "^1.2.2",
     "express": "^4.18.2",
     "form-data": "^4.0.0",
