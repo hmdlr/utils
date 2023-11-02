@@ -184,8 +184,7 @@ export default class Scanphish {
    */
   public async info(websiteDomain: string): Promise<WebsiteInfo> {
     return this.client.get<WebsiteInfo>(
-      `${this.scanApi}/info`,
-      { url: websiteDomain }
+      `${this.scanApi}/info/${websiteDomain}`,
     );
   }
 }
