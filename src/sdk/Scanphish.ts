@@ -15,6 +15,7 @@ export default class Scanphish {
   private readonly api = 'api';
 
   private readonly configsApi = `${this.api}/config`;
+
   private readonly scanApi = `${this.api}/scan`;
 
   constructor(
@@ -92,18 +93,19 @@ export default class Scanphish {
 
   /**
    * Returns a list of all the configs the user has access to
+   * If `forGroup` is provided, it will return the configs for that group if the user has access
    * @param request
    * @param includeBrands
-   * @param publicOnly
+   * @param forGroup
    */
   public async listConfigs(
     request: PagedRequest,
     includeBrands = false,
-    publicOnly = false
+    forGroup?: string
   ) {
     return this.client.get<PagedResults<IConfig>>(
       // eslint-disable-next-line max-len
-      `${this.configsApi}/?includeBrands=${includeBrands}&publicOnly=${publicOnly}&${buildPagedRequest(request)}`
+      `${this.configsApi}/?includeBrands=${includeBrands}&forGroup=${forGroup}&${buildPagedRequest(request)}`
     )
       .then(PagedResults.fromPagedJson as any);
   }
@@ -184,7 +186,7 @@ export default class Scanphish {
    */
   public async info(websiteDomain: string): Promise<WebsiteInfo> {
     return this.client.get<WebsiteInfo>(
-      `${this.scanApi}/info/${websiteDomain}`,
+      `${this.scanApi}/info/${websiteDomain}`
     );
   }
 }
