@@ -61,9 +61,10 @@ export default class Authphish {
     ).then(PagedResults.fromPagedJson as any);
   }
 
-  public async listResourcesByType(request: PagedRequest, type: string) {
+  public async listResourcesByType(request: PagedRequest, type: string, groupId?: string) {
     return this.client.get<PagedResults<Resource>>(
-      `${this.groupsApi}/resources?type=${type}&${buildPagedRequest(request)}`
+      // eslint-disable-next-line max-len
+      `${this.groupsApi}/resources?type=${type}&${buildPagedRequest(request)}${groupId ? `&groupId=${groupId}` : ''}`
     ).then(PagedResults.fromPagedJson as any);
   }
 }
