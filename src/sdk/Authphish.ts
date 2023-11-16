@@ -49,6 +49,12 @@ export default class Authphish {
 
   /* ===================== */
   /* Groups */
+  public async listGroups(request: PagedRequest) {
+    return this.client.get<PagedResults<Resource>>(
+      `${this.groupsApi}?${buildPagedRequest(request)}`
+    ).then(PagedResults.fromPagedJson as any);
+  }
+  
   public async listUserRootResources(request: PagedRequest) {
     return this.client.get<PagedResults<Resource>>(
       `${this.groupsApi}/root-resources?${buildPagedRequest(request)}`
