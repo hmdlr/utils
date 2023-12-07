@@ -7,7 +7,8 @@ export default class Authphish {
 
   constructor(
     private client: BareClient
-  ) {}
+  ) {
+  }
 
   public async hasPermission({
     bearer,
@@ -48,6 +49,7 @@ export default class Authphish {
   }
 
   /* ===================== */
+
   /* Groups */
   public async listGroups(request: PagedRequest) {
     return this.client.get<PagedResults<IGroup>>(
@@ -79,5 +81,12 @@ export default class Authphish {
       `${this.groupsApi}/${groupId}/belongs/${userId}`
     );
     return result.belongs;
+  }
+
+  public async hasEditAccess(resourceId: string): Promise<boolean> {
+    const result = await this.client.get<{ hasAccess: boolean }>(
+      `${this.groupsApi}/edit/${resourceId}/`
+    );
+    return result.hasAccess;
   }
 }
