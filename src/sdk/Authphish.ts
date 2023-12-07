@@ -73,4 +73,11 @@ export default class Authphish {
       `${this.groupsApi}/resources?type=${type}&${buildPagedRequest(request)}${groupId ? `&groupId=${groupId}` : ''}`
     ).then(PagedResults.fromPagedJson as any);
   }
+
+  public async userBelongsToGroup(userId: string, groupId: string): Promise<boolean> {
+    const result = await this.client.get<{ belongs: boolean }>(
+      `${this.groupsApi}/${groupId}/belongs/${userId}`
+    );
+    return result.belongs;
+  }
 }
