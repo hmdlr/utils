@@ -105,7 +105,7 @@ export default class Scanphish {
   ) {
     return this.client.get<PagedResults<IConfig>>(
       // eslint-disable-next-line max-len
-      `${this.configsApi}/?includeBrands=${includeBrands}&forGroup=${forGroup}&${buildPagedRequest(request)}`
+      `${this.configsApi}/?includeBrands=${includeBrands}&fromGroup=${forGroup}&${buildPagedRequest(request)}`
     )
       .then(PagedResults.fromPagedJson as any);
   }
