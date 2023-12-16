@@ -102,6 +102,23 @@ export default class Scanphish {
       .then(PagedResults.fromPagedJson as any);
   }
 
+  /**
+   * Search among brands, with possiblity of filtering with groups
+   * @param request
+   * @param query The search string
+   * @param fromGroup the group you want paged results from
+   */
+  public async searchBrands(
+    request: PagedRequest,
+    query: string,
+    fromGroup?: string
+  ) {
+    return this.client.get<PagedResults<IBrand>>(
+      `${this.api}/brand/search?${buildPagedRequest(request)}&query=${query}&fromGroup=${fromGroup}`
+    )
+      .then(PagedResults.fromPagedJson as any);
+  }
+
   /* ===================== */
 
   /* Configs */
