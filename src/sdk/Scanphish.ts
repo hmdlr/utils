@@ -77,6 +77,17 @@ export default class Scanphish {
   }
 
   /**
+   * Deletes a brand
+   */
+  public async deleteBrand(
+    brandId: string
+  ): Promise<void> {
+    return this.client.delete<any>(
+      `${this.api}/brand/${brandId}`
+    );
+  }
+
+  /**
    * Returns a list of all the brands the user has access to
    * @param request
    */
