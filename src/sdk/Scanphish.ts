@@ -90,10 +90,14 @@ export default class Scanphish {
   /**
    * Returns a list of all the brands the user has access to
    * @param request
+   * @param fromGroup
    */
-  public async listBrands(request: PagedRequest) {
+  public async listBrands(
+    request: PagedRequest,
+    fromGroup?: string
+  ) {
     return this.client.get<PagedResults<IBrand>>(
-      `${this.api}/brand?${buildPagedRequest(request)}`
+      `${this.api}/brand?${buildPagedRequest(request)}&fromGroup=${fromGroup}`
     )
       .then(PagedResults.fromPagedJson as any);
   }
